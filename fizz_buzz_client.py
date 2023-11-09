@@ -1,21 +1,27 @@
 import requests
 import argparse
+import json
 
 BASE_URL = "http://127.0.0.1:4000/api"
 
 def get_values_between(start_range, end_range):
     params = {"start_range": start_range, "end_range": end_range}
     response = requests.get(f"{BASE_URL}/get_values_between", params=params)
-    print(response.json())
+    results = response.json()
+    data_list =json.loads(results)
+    for item in data_list:
+        heart = " <3" if item['favourited'] else ""
+        print(f"{item['value']}{heart}\n")
 
 def get_homepage_values():
     response = requests.get(f"{BASE_URL}/get_homepage_values")
-    print(response.json())
+    results = response.json()
+    data_list =json.loads(results)
+    for item in data_list:
+        heart = " <3" if item['favourited'] else ""
+        print(f"{item['value']}{heart}\n")
 
-def get_favourites():
-    response = requests.get(f"{BASE_URL}/get_favourites")
-    print(response.json())
-
+        
 def set_favourite(number, value):
     data = {"number": number, "value": value}
     response = requests.post(f"{BASE_URL}/set_favourite", json=data)
@@ -39,8 +45,6 @@ if __name__ == "__main__":
         get_values_between(args.start_range, args.end_range)
     elif args.action == "get_homepage_values":
         get_homepage_values()
-    elif args.action == "get_favourites":
-        get_favourites()
     elif args.action == "set_favourite":
         set_favourite(args.number, args.value)
     elif args.action == "delete_favourite":
