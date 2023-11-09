@@ -23,10 +23,17 @@ touch fizz_buzz_client.py
 
 # Run your script with the desired arguments. Here are some examples:
 To get the homepage values:
+
 python fizz_buzz_client.py get_homepage_values
+
 To get the values between a specific range:
+
 python fizz_buzz_client.py get_values_between --start_range 1 --end_range 20
+
 To set a favorite:
+
 python fizz_buzz_client.py set_favourite --number 3 --value "fizz"
+
 To delete a favorite:
+
 python fizz_buzz_client.py delete_favourite --number 3
